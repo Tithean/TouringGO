@@ -1,4 +1,4 @@
-import { apiFetch } from "@/lib/api";
+import { apiFetch } from "@/config/api";
 import { Province } from "./provinceType";
 
 export default async function getProvinceByID(id: number): Promise<Province> {
