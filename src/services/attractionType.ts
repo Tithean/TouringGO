@@ -1,4 +1,5 @@
 export type Attraction = {
+  id: number;
   nameKh: string;
   nameEn: string;
   descriptionKh: string;
