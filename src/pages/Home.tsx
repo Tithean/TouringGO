@@ -2,8 +2,7 @@ import Link from "next/link";
 import getProvince from "@/services/getProvince";
 import ProvinceCard from "@/components/HomeCard";
 import getAttraction from "@/services/getAttraction";
-import HomeCard from "@/components/HomeCard";
-
+import HomeCard, { AttractionCard } from "@/components/HomeCard";
 async function HomePage() {
   // Province API data
   const provinces = await getProvince();
@@ -16,7 +15,7 @@ async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[600px] w-full flex flex-col justify-center items-center text-center px-4">
+      <section className="relative h-150 w-full flex flex-col justify-center items-center text-center px-4">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqf_N0ihora-4VUsWgusNbkyeiQRQd-Q2CWM9FrJ_AV0nto2CO0FvyN3sh&s=10')" }}
@@ -65,6 +64,29 @@ async function HomePage() {
       {/* 2nd section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 space-y-20">
 
+        {/* Explore by Category */}
+        <section>
+          <div className="mb-8">
+            <h2 className="text-3xl font-extrabold text-slate-900">Explore by Category</h2>
+            <p className="text-slate-500 mt-2">Find exactly what you're looking for in Cambodia</p>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {["All", "Temple", "Nature", "Beach", "Waterfall", "Historical", "Museum", "Market"].map((category, index) => (
+              <Link 
+                key={category} 
+                href="#"
+                className={`px-6 py-2 rounded-full border font-semibold transition-colors ${
+                  index === 0 
+                    ? "border-[#0052FF] border-2 text-[#0052FF]" 
+                    : "border-blue-200 text-blue-500 hover:border-[#0052FF] hover:text-[#0052FF]"
+                }`}
+              >
+                {category}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* Popular Destinations */}
         <section>
           <div className="flex justify-between items-end mb-8">
@@ -72,7 +94,7 @@ async function HomePage() {
               <h2 className="text-3xl font-extrabold text-slate-900">Popular Destinations</h2>
               <p className="text-slate-500 mt-2">Explore top provinces loved by travelers</p>
             </div>
-            <Link href="/destinations" className="hidden sm:inline-flex font-semibold text-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary-dark)]">
+            <Link href="/" className="hidden sm:inline-flex font-semibold text-[#0052FF] hover:text-[#003BB5]">
               View All &rarr;
             </Link>
           </div>
@@ -83,6 +105,7 @@ async function HomePage() {
           </div>
         </section>
 
+        {/* 3rd section */}
         {/* Featured Attractions */}
         <section>
           <div className="flex justify-between items-end mb-8">
@@ -90,19 +113,19 @@ async function HomePage() {
               <h2 className="text-3xl font-extrabold text-slate-900">Featured Experiences</h2>
               <p className="text-slate-500 mt-2">Top rated tourist attractions and tours</p>
             </div>
-            <Link href="/attractions" className="hidden sm:inline-flex font-semibold text-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary-dark)]">
+            <Link href="/" className="hidden sm:inline-flex font-semibold text-[#0052FF] hover:text-[#003BB5]">
               View All Deals &rarr;
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {topAttractions.map((attraction) => (
-              <HomeCard key={attraction.id} attraction={attraction} />
+              <AttractionCard key={attraction.id} attraction={attraction} />
             ))}
           </div>
         </section>
 
-        {/* Newsletter Callout */}
-        <section className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-3xl p-8 md:p-12 border border-blue-100 flex flex-col md:flex-row items-center justify-between shadow-sm">
+        {/* Blog Section */}
+        <section className="bg-linear-to-r from-blue-50 to-cyan-50 rounded-3xl p-8 md:p-12 border border-blue-100 flex flex-col md:flex-row items-center justify-between shadow-sm">
           <div className="max-w-xl mb-6 md:mb-0">
             <h2 className="text-3xl font-extrabold text-slate-900 mb-3">Get Travel Inspiration</h2>
             <p className="text-slate-600 mb-6 text-lg">Subscribe to our newsletter and be the first to know about exclusive deals and hidden gems.</p>
@@ -112,15 +135,15 @@ async function HomePage() {
                 placeholder="Your email address"
                 className="flex-1 px-4 py-3 rounded-l-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
               />
-              <button className="bg-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary-dark)] text-white px-6 py-3 rounded-r-xl font-bold transition-colors shadow-md">
+              <button className="bg-[#0052FF] hover:bg-[#003BB5] text-white px-6 py-3 rounded-r-xl font-bold transition-colors shadow-md">
                 GO
               </button>
             </div>
           </div>
           <div className="hidden lg:block relative w-64 h-40">
             <div className="absolute inset-0 bg-white/60 rounded-full blur-2xl"></div>
-            <div className="relative z-10 text-4xl font-extrabold text-[var(--color-brand-primary)] italic rotate-[-5deg] leading-tight text-center">
-              Explore<br />Book<br /><span className="text-[var(--color-brand-accent)]">Go</span>
+            <div className="relative z-10 text-4xl font-extrabold italic rotate-[-5deg] leading-tight text-center text-[#0052FF]">
+              Explore<br />Book<br /><span className="text-[#00D4FF]">Go</span>
             </div>
           </div>
         </section>
