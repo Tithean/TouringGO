@@ -1,9 +1,18 @@
-import HomePage from "@/pages/ex1";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import Search from "@/components/Search";
+import SearchResult from "@/components/SearchResult";
+import Provinces from "@/components/Provinces";
+
+export default function HomePage() {
+  const [keyword, setKeyword] = useState("");
+
   return (
-    <div>
-      <HomePage />
-    </div>
+    <main className="min-h-screen p-6 max-w-6xl mx-auto">
+      <Search onSearch={setKeyword} />
+      <SearchResult keyword={keyword} />
+      <Provinces />
+    </main>
   );
 }
