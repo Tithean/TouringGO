@@ -1,5 +1,6 @@
 export type Attraction = {
   id: number;
+  imageUrls: string[];
   nameKh: string;
   nameEn: string;
   descriptionKh: string;
