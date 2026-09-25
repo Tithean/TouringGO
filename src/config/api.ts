@@ -1,3 +1,4 @@
+
 const API_URL = "https://cam-trip.cheat.casa";
 
 export async function apiFetch<T>(
