@@ -1,8 +1,8 @@
+
 "use client";
 import { useState } from "react";
 
 interface SearchProps {
-  /** Called with the trimmed keyword when the user submits a search */
   onSearch: (keyword: string) => void;
 }
 

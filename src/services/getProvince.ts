@@ -1,6 +1,6 @@
 import { apiFetch } from "@/config/api";
-import { Province } from "./provinceType";
+import type { Province } from "./provinceType";
 
 export default async function getProvince(): Promise<Province[]> {
-  return await apiFetch<Province[]>("/api/provinces");
+  return apiFetch<Province[]>("/provinces");
 }

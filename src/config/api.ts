@@ -1,11 +1,15 @@
-const API_URL = "https://cam-trip.cheat.casa";
+
+export const API_BASE_URL = "/api";
 
 export async function apiFetch<T>(
   endpoint: string,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<T> {
+  const url = `${API_BASE_URL}${endpoint}`;
+  console.log("apiFetch ->", url);
+
   try {
-    const response = await fetch(`${API_URL}${endpoint}`, {
+    const response = await fetch(url, {
       ...options,
       headers: {
         "Content-Type": "application/json",
@@ -14,12 +18,12 @@ export async function apiFetch<T>(
     });
 
     if (!response.ok) {
-      throw new Error(`Failed: ${response.status}`);
+      throw new Error(`Failed: ${response.status} ${response.statusText}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error("API error:", error);
+    console.error("apiFetch error:", error);
     throw error;
   }
 }

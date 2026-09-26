@@ -1,10 +1,5 @@
-export interface Province {
-  id: number;
-  nameKh: string;
-  nameEn: string;
-  region: string;
-  imageUrl: string;
-}
+
+import type { Province } from "./provinceType";
 
 export interface Attraction {
   id: number;

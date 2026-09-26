@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -11,8 +12,11 @@ export default function HomePage() {
   return (
     <main className="min-h-screen p-6 max-w-6xl mx-auto">
       <Search onSearch={setKeyword} />
+
+    
       <SearchResult keyword={keyword} />
-      <Provinces />
+
+      {!keyword && <Provinces />}
     </main>
   );
 }

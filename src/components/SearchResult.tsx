@@ -1,115 +1,47 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Attraction, SearchApiResponse } from "@/services/attractionType";
-import type { Province } from "@/services/provinceType";
-import SearchResultCard from "./SearchResultpage";
-import ProvinceCard from "./ProvinceCard";
+import searchAttractions from "@/services/searchAttractions";
+import type { Attraction } from "@/services/attractionType";
+import SearchResultCard from "./SearchResultCard";
 
-function matchesKeyword(text: string | null | undefined, keyword: string) {
-  if (!text) return false;
-  return text.toLowerCase().includes(keyword.toLowerCase());
+interface SearchResultProps {
+  keyword: string;
 }
 
-export default function SearchResult({ keyword }: { keyword: string }) {
+export default function SearchResult({ keyword }: SearchResultProps) {
   const [attractions, setAttractions] = useState<Attraction[]>([]);
-  const [matchedProvinces, setMatchedProvinces] = useState<Province[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchGlobalSearch() {
-      const trimmed = keyword.trim();
-
-      if (!trimmed) {
-        setAttractions([]);
-        setMatchedProvinces([]);
-        setError("");
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setError("");
-
-        const params = new URLSearchParams({
-          keyword: trimmed,
-          page: "0",
-          size: "20",
-        });
-
-        // Run attraction search + province list fetch in parallel
-        const [attractionsRes, provincesRes] = await Promise.all([
-          fetch(`/api/attractions/search?${params.toString()}`),
-          fetch(`/api/provinces`),
-        ]);
-
-        if (!attractionsRes.ok) {
-          throw new Error(`API error ${attractionsRes.status}`);
-        }
-        if (!provincesRes.ok) {
-          throw new Error(`API error ${provincesRes.status}`);
-        }
-
-        const attractionsData: SearchApiResponse = await attractionsRes.json();
-        const provincesData: Province[] = await provincesRes.json();
-
-        // Match provinces client-side by Khmer or English name
-        const matched = (provincesData || []).filter(
-          (p) => matchesKeyword(p.nameKh, trimmed) || matchesKeyword(p.nameEn, trimmed)
-        );
-
-        setAttractions(attractionsData.content || []);
-        setMatchedProvinces(matched);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load search results");
-        setAttractions([]);
-        setMatchedProvinces([]);
-      } finally {
-        setLoading(false);
-      }
+    if (!keyword) {
+      setAttractions([]);
+      return;
     }
 
-    fetchGlobalSearch();
+    setLoading(true);
+    setError(null);
+
+    searchAttractions(keyword)
+      .then((data) => setAttractions(data.content))
+      .catch((err: Error) => setError(err.message))
+      .finally(() => setLoading(false));
   }, [keyword]);
 
-  if (!keyword.trim()) return null;
-  if (loading) return <div className="py-8 text-center text-gray-500">Searching...</div>;
-  if (error) return <div className="py-8 text-center text-red-500">{error}</div>;
-
-  const hasResults = attractions.length > 0 || matchedProvinces.length > 0;
-
-  if (!hasResults) {
-    return (
-      <div className="py-8 text-center text-gray-500">
-        No results found for "{keyword}"
-      </div>
-    );
-  }
+  if (!keyword) return null;
+  if (loading) return <p className="text-center py-10">Searching...</p>;
+  if (error)
+    return <p className="text-center py-10 text-red-600">Error: {error}</p>;
+  if (attractions.length === 0)
+    return <p className="text-center py-10">No results found.</p>;
 
   return (
-    <div className="space-y-8">
-      {matchedProvinces.length > 0 && (
-        <div>
-          <h2 className="text-xl font-bold mb-4">Provinces</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            {matchedProvinces.map((item) => (
-              <ProvinceCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {attractions.length > 0 && (
-        <div>
-          <h2 className="text-xl font-bold mb-4">Attractions</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            {attractions.map((item) => (
-              <SearchResultCard key={item.id} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {attractions.map((attraction) => (
+        <SearchResultCard key={attraction.id} attraction={attraction} />
+      ))}
     </div>
   );
 }
