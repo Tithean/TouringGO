@@ -1,9 +1,9 @@
-import Ex2 from "@/pages/ex2";
+import AboutUs from "@/pages/AboutUs";
 
 export default function Home() {
   return (
     <div>
-      <Ex2 />
+      <AboutUs />
     </div>
   );
 }

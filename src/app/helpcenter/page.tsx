@@ -1,9 +1,10 @@
-import HomePage from "@/pages/Home";
+
+import HelpCenter from "@/pages/HelpCenter";
 
 export default function Home() {
   return (
     <div>
-      <HomePage />
+      <HelpCenter />
     </div>
   );
 }

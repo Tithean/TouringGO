@@ -1,4 +1,5 @@
 export type Attraction = {
+  id: number;
   nameKh: string;
   nameEn: string;
   descriptionKh: string;
@@ -10,4 +11,16 @@ export type Attraction = {
   longitude: number;
   entryFee: number;
   rating: number;
+  imageUrls?: string[];
+  province?: {
+    id: number;
+    nameKh: string;
+    nameEn: string;
+    region: string;
+    imageUrl: string;
+  };
+};
+
+export type SearchApiResponse = {
+  content: Attraction[];
 };
