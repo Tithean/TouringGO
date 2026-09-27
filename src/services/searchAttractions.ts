@@ -1,8 +1,8 @@
-import { apiFetch } from "@/config/api";
-import type { SearchApiResponse } from "./attractionType";
 
-// Adjust the query param names (keyword/page/size) to match your real backend
-// if it expects different ones.
+import { apiFetch } from "@/config/api";
+import { SearchApiResponse } from "./attractionType";
+import type { Province } from "./provinceType";
+
 export default async function searchAttractions(
   keyword: string,
   page = 0,
@@ -14,7 +14,27 @@ export default async function searchAttractions(
     size: String(size),
   });
 
-  return apiFetch<SearchApiResponse>(
+  const data = await apiFetch<SearchApiResponse>(
     `/attractions/search?${params.toString()}`
   );
+
+
+  if (data.totalElements === 0) {
+    const provinces = await apiFetch<Province[]>("/provinces");
+    const matchedProvince = provinces.find(
+      (p) =>
+        p.nameKh.trim() === keyword.trim() ||
+        p.nameEn.toLowerCase() === keyword.trim().toLowerCase()
+    );
+
+    if (matchedProvince) {
+     
+      const byProvince = await apiFetch<SearchApiResponse>(
+        `/attractions?provinceId=${matchedProvince.id}&page=${page}&size=${size}`
+      );
+      return byProvince;
+    }
+  }
+
+  return data;
 }
