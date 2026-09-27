@@ -11,12 +11,59 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TouringGO",
-  description: "Explore attractions in Cambodia",
+  // 1. Base URL required for resolving social share images to absolute URLs
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://touringgo.com"
+  ),
+
+  // 2. Browser tab title with template support for dynamic child pages
+  title: {
+    default: "TouringGO - Cambodia Tourist Attractions",
+    template: "%s | TouringGO",
+  },
+  description:
+    "Discover amazing places, book unforgettable experiences, and explore the world with TouringGO.",
+  keywords: [
+    "Tourist attractions",
+    "Cambodia",
+    "Travel",
+    "Tours",
+    "Vacation",
+    "Angkor Wat",
+  ],
+
+  // 3. Browser favicons and touch icons
   icons: {
     icon: siteIcon.src,
     shortcut: siteIcon.src,
     apple: siteIcon.src,
+  },
+
+  // 4. OpenGraph metadata for social sharing (Facebook, Telegram, WhatsApp, LinkedIn)
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "TouringGO",
+    title: "TouringGO - Cambodia Tourist Attractions",
+    description:
+      "Discover amazing places, book unforgettable experiences, and explore the world with TouringGO.",
+    images: [
+      {
+        url: "/storeThumbnail.png",
+        width: 1200,
+        height: 630,
+        alt: "TouringGO - Cambodia Tourist Attractions",
+      },
+    ],
+  },
+
+  // 5. Twitter / X Card preview configuration
+  twitter: {
+    card: "summary_large_image",
+    title: "TouringGO - Cambodia Tourist Attractions",
+    description:
+      "Discover amazing places, book unforgettable experiences, and explore the world with TouringGO.",
+    images: ["/storeThumbnail.png"],
   },
 };
 

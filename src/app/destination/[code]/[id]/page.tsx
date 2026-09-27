@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata, ResolvingMetadata } from "next";
 import { slugifyDestination } from "@/services/destinationRoute";
 import getAttractionById from "@/services/getAttractionById";
 
@@ -12,11 +13,56 @@ function formatEntryFee(value?: number) {
   return value > 0 ? `$${value}` : "Free";
 }
 
-export default async function AttractionDetailPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ code: string; id: string }>;
-}) {
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+  const attractionId = Number(decodeURIComponent(id || ""));
+
+  if (!Number.isFinite(attractionId) || attractionId <= 0) {
+    return { title: "Not Found" };
+  }
+
+  try {
+    const attraction = await getAttractionById(attractionId);
+
+    if (!attraction) {
+      return { title: "Not Found" };
+    }
+
+    const title = attraction.nameEn || attraction.nameKh || "Attraction";
+    const description =
+      attraction.descriptionEn ||
+      attraction.descriptionKh ||
+      "Discover amazing places and explore the world with TouringGO.";
+
+    const imageUrl =
+      attraction.imageUrls?.[0] ||
+      attraction.province?.imageUrl ||
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80";
+
+    const previousImages = (await parent).openGraph?.images || [];
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        images: [imageUrl, ...previousImages],
+      },
+    };
+  } catch (error) {
+    return { title: "Attraction" };
+  }
+}
+
+export default async function AttractionDetailPage({ params }: Props) {
   const { code, id } = await params;
   const attractionId = Number(decodeURIComponent(id || ""));
 
@@ -34,10 +80,10 @@ export default async function AttractionDetailPage({
     attraction.province?.nameEn || attraction.province?.nameKh || "Destination";
   const provinceSlug = attraction.province
     ? slugifyDestination(
-        attraction.province.nameEn ||
-          attraction.province.nameKh ||
-          String(attraction.province.id),
-      )
+      attraction.province.nameEn ||
+      attraction.province.nameKh ||
+      String(attraction.province.id),
+    )
     : slugifyDestination(decodeURIComponent(code || "") || "destination");
 
   const imageUrl =
