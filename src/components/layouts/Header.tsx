@@ -99,7 +99,7 @@ const ChevronDown = ({ size = 14, className = "" }: IconProps) => (
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Destinations", href: "/" },
+  { label: "Destinations", href: "/destination" },
   { label: "Tours", href: "/" },
   { label: "Help Center", href: "/helpcenter" },
 ];
