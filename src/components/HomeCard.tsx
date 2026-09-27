@@ -94,3 +94,36 @@ export function AttractionCard({ attraction }: { attraction: Attraction }) {
     </Link>
   );
 }
+
+export function ExploreDestinationCard({ province }: { province: Province }) {
+  const attractionCount = province.attractionCount ?? 0;
+  const countLabel =
+    attractionCount > 0 ? `${attractionCount} destinations` : "Popular destination";
+  const displayName =
+    province.nameEn === "Preah Sihanouk" ? "Sihanoukville" : province.nameEn;
+
+  return (
+    <Link
+      href={getDestinationRoute(province)}
+      className="group block transition-transform duration-300 hover:-translate-y-1"
+    >
+      <div className="relative aspect-4/3 w-full rounded-2xl overflow-hidden bg-slate-100 shadow-xs">
+        <Image
+          src={province.imageUrl}
+          alt={displayName}
+          fill
+          unoptimized
+          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        />
+      </div>
+      <div className="mt-2.5">
+        <h4 className="font-bold text-slate-900 text-sm md:text-base group-hover:text-[#0052FF] transition-colors line-clamp-1">
+          {displayName}
+        </h4>
+        <p className="text-xs text-slate-500 mt-0.5 font-medium">
+          {countLabel}
+        </p>
+      </div>
+    </Link>
+  );
+}

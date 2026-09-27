@@ -2,17 +2,22 @@ import Link from "next/link";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import getProvince from "@/services/getProvince";
-import ProvinceCard from "@/components/HomeCard";
 import getAttraction from "@/services/getAttraction";
 import Banner from "@/assets/angkor.png";
-import HomeCard, { AttractionCard } from "@/components/HomeCard";
-async function HomePage() {
-  // Province API data
-  const provinces = await getProvince();
-  const topProvinces = provinces.slice(0, 4);
+import HomeCard, {
+  AttractionCard,
+  ExploreDestinationCard,
+} from "@/components/HomeCard";
 
-  // Attraction API data
-  const attractions = await getAttraction();
+async function HomePage() {
+  // Fetch data in parallel for optimal server performance
+  const [provinces, attractions] = await Promise.all([
+    getProvince(),
+    getAttraction(),
+  ]);
+
+  const topProvinces = provinces.slice(0, 4);
+  const exploreProvinces = provinces.slice(0, 6);
   const topAttractions = attractions.slice(0, 4);
 
   return (
@@ -99,11 +104,10 @@ async function HomePage() {
                 <Link
                   key={category}
                   href="#"
-                  className={`px-6 py-2 rounded-full border font-semibold transition-colors ${
-                    index === 0
-                      ? "border-[#0052FF] border-2 text-[#0052FF]"
-                      : "border-blue-200 text-blue-500 hover:border-[#0052FF] hover:text-[#0052FF]"
-                  }`}
+                  className={`px-6 py-2 rounded-full border font-semibold transition-colors ${index === 0
+                    ? "border-[#0052FF] border-2 text-[#0052FF]"
+                    : "border-blue-200 text-blue-500 hover:border-[#0052FF] hover:text-[#0052FF]"
+                    }`}
                 >
                   {category}
                 </Link>
@@ -132,6 +136,36 @@ async function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {topProvinces.map((province) => (
                 <HomeCard key={province.id} province={province} />
+              ))}
+            </div>
+          </section>
+
+          {/* Explore Cambodia Section */}
+          <section>
+            <div className="flex justify-between items-end mb-6">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                  Explore Cambodia
+                </h2>
+                <p className="text-slate-500 text-sm mt-1">
+                  These popular destinations have a lot to offer
+                </p>
+              </div>
+              <Link
+                href="/destination"
+                className="hidden sm:inline-flex font-semibold text-sm text-[#0052FF] hover:text-[#003BB5]"
+              >
+                View All &rarr;
+              </Link>
+            </div>
+
+            {/* 6 horizontal cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {exploreProvinces.map((province) => (
+                <ExploreDestinationCard
+                  key={province.id}
+                  province={province}
+                />
               ))}
             </div>
           </section>
