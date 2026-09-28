@@ -164,14 +164,14 @@ export default function Header() {
               </button>
 
               <Link
-                href="/about"
+                href="/auth?tab=login"
                 className="hidden text-sm font-semibold text-slate-700 transition hover:text-blue-700 md:inline-flex md:px-2 md:py-2"
               >
                 Sign In
               </Link>
 
               <Link
-                href="/helpcenter"
+                href="/auth?tab=register"
                 className="hidden items-center rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:brightness-110 md:inline-flex"
               >
                 Register

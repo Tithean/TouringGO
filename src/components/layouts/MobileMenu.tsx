@@ -91,14 +91,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         <div className="space-y-3 px-4 pt-4">
           <Link
-            href="/about"
+            href="/auth?tab=login"
             onClick={onClose}
             className="block w-full rounded-2xl border border-blue-200 bg-white px-4 py-3 text-center font-semibold text-blue-700 transition hover:bg-blue-50"
           >
             Sign In
           </Link>
           <Link
-            href="/helpcenter"
+            href="/auth?tab=register"
             onClick={onClose}
             className="block w-full rounded-2xl bg-gradient-to-r from-blue-600 to-sky-500 px-4 py-3 text-center font-semibold text-white shadow-lg shadow-blue-500/30"
           >
