@@ -6,6 +6,11 @@ import ProvinceCard from "@/components/HomeCard";
 import getAttraction from "@/services/getAttraction";
 import Banner from "@/assets/angkor.png";
 import HomeCard, { AttractionCard } from "@/components/HomeCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarDays,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 async function HomePage() {
   // Province API data
   const provinces = await getProvince();
@@ -19,63 +24,69 @@ async function HomePage() {
     <>
       <div className="flex flex-col">
         {/* Hero Section */}
-        <section className="relative h-[600px] w-full overflow-hidden">
+        <section className="relative bg-blue-600 h-[600px] w-full overflow-hidden">
           <img
             src={Banner.src}
             alt="Cambodia travel destination"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-blue-600/60"/>
 
-          <div className="relative z-10 max-w-4xl mx-auto mt-12">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-md">
-              Your Next Adventure Awaits in Cambodia
+          <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-4">
+            <h1 className="mx-auto mb-6 max-w-4xl text-center text-5xl font-bold text-white drop-shadow-md md:text-6xl">
+              Your Next Adventure Awaits in <span className="">Cambodia</span>
             </h1>
-            <p className="text-xl text-white/90 mb-10 font-medium max-w-2xl mx-auto drop-shadow-sm">
+            <p className="mx-auto mb-10 max-w-2xl text-center text-xl font-medium text-white/90 drop-shadow-sm">
               Discover ancient temples, tropical waterfalls, and vibrant local
               culture with TouringGO.
             </p>
 
             {/* Search Box */}
-            <div className="bg-white p-2 rounded-2xl shadow-xl flex flex-col md:flex-row max-w-3xl mx-auto">
-              <div className="flex-1 px-4 py-3 text-left border-b md:border-b-0 md:border-r border-slate-200">
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
-                  Destination
-                </label>
-                <select className="w-full bg-transparent text-slate-900 font-semibold focus:outline-none appearance-none cursor-pointer">
-                  <option value="">Where are you going?</option>
-                  {provinces.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.nameEn || p.nameKh}
-                    </option>
-                  ))}
-                </select>
+            <div className="mx-auto grid w-full max-w-2xl grid-cols-1 rounded-xl border border-slate-200 bg-white p-2 shadow-xl md:grid-cols-[minmax(150px,0.9fr)_minmax(300px,1.5fr)_minmax(180px,1fr)]">
+              <div className="flex items-center gap-3 px-3 py-3 text-left">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="h-5 w-5 shrink-0 text-slate-900"
+                />
+                <div className="min-w-0">
+                  <p className="truncate text-base font-semibold text-slate-500">
+                    Where to?
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 px-4 py-3 text-left">
-                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
-                  Category
-                </label>
-                <select className="w-full bg-transparent text-slate-900 font-semibold focus:outline-none appearance-none cursor-pointer">
-                  <option value="">All Categories</option>
-                  <option value="TEMPLE">Temple</option>
-                  <option value="NATURE">Nature</option>
-                  <option value="BEACH">Beach</option>
-                  <option value="WATERFALL">Waterfall</option>
-                </select>
+
+              <div className="flex items-center gap-3 border-t border-slate-200 px-3 py-3 text-left md:border-l md:border-t-0">
+                <FontAwesomeIcon
+                  icon={faCalendarDays}
+                  className="h-5 w-5 shrink-0 text-slate-900"
+                />
+                <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-slate-950">
+                  <span className="whitespace-nowrap text-sm font-semibold">
+                    Thu, Oct 1
+                  </span>
+                  <span className="hidden text-slate-500 sm:inline">-</span>
+                  <span className="whitespace-nowrap text-sm font-semibold">
+                    Fri, Oct 2
+                  </span>
+                  <span className="whitespace-nowrap rounded-full bg-slate-100 px-2 py-1 text-xs font-medium">
+                    1 night
+                  </span>
+                </div>
               </div>
-              <Link
-                href="/attractions"
-                className="bg-[#0052FF] hover:bg-[#003BB5] text-white md:w-40 flex items-center justify-center font-bold text-lg rounded-xl transition-colors m-2 py-3 md:py-0 shadow-lg shadow-blue-500/30"
-              >
-                Search
-              </Link>
+
+              <div className="border-t border-slate-200 pt-1 md:border-l md:border-t-0 md:pl-2 md:pt-0">
+                <Link
+                  href="/destination"
+                  className="flex h-full min-h-11 items-center justify-center gap-3 rounded-lg bg-[#365dff] px-4 py-2 text-base font-bold text-white transition-colors hover:bg-[#2448df]"
+                >
+                  Explore
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 2nd section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 space-y-20">
-          {/* Explore by Category */}
           <section>
             <div className="mb-8">
               <h2 className="text-3xl font-extrabold text-slate-900">

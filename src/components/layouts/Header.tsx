@@ -151,28 +151,15 @@ export default function Header() {
                 <span>EN</span>
               </button>
 
-              <button className="hidden items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-200 hover:text-blue-700 md:flex">
-                <span>USD</span>
-                <ChevronDown size={14} />
-              </button>
-
               <button
                 className="hidden h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-blue-200 hover:text-blue-700 md:flex"
                 aria-label="Favorites"
               >
                 <Heart size={18} />
               </button>
-
-              <Link
-                href="/auth?tab=login"
-                className="hidden text-sm font-semibold text-slate-700 transition hover:text-blue-700 md:inline-flex md:px-2 md:py-2"
-              >
-                Sign In
-              </Link>
-
               <Link
                 href="/auth?tab=register"
-                className="hidden items-center rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:brightness-110 md:inline-flex"
+                className="hidden items-center px-5 py-2.5 text-sm text-slate-700 hover:text-blue-700  md:inline-flex"
               >
                 Register
               </Link>

@@ -1,8 +1,7 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
@@ -12,7 +11,13 @@ interface AuthenticationProps {
 
 export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<"login" | "register">(defaultTab);
+
+  const changeTab = (tab: "login" | "register") => {
+    setActiveTab(tab);
+    router.replace(`${pathname}?tab=${tab}`, { scroll: false });
+  };
 
   const handleSuccess = () => {
     router.push("/");
@@ -55,7 +60,7 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
         <div className="w-full max-w-sm mx-auto my-auto space-y-6 py-6">
           <div className="flex bg-gray-100 p-1 rounded-xl text-xs">
             <button
-              onClick={() => setActiveTab("login")}
+              onClick={() => changeTab("login")}
               className={`flex-1 py-2.5 rounded-lg font-medium transition-all duration-150 ${
                 activeTab === "login"
                   ? "bg-white text-blue-600 shadow-sm font-semibold"
@@ -65,7 +70,7 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
               Sign In
             </button>
             <button
-              onClick={() => setActiveTab("register")}
+              onClick={() => changeTab("register")}
               className={`flex-1 py-2.5 rounded-lg font-medium transition-all duration-150 ${
                 activeTab === "register"
                   ? "bg-white text-blue-600 shadow-sm font-semibold"
@@ -116,7 +121,7 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
               <>
                 Don&apos;t have an account?{" "}
                 <button
-                  onClick={() => setActiveTab("register")}
+                  onClick={() => changeTab("register")}
                   className="text-blue-600 font-medium hover:underline"
                 >
                   Register
@@ -126,7 +131,7 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
               <>
                 Already have an account?{" "}
                 <button
-                  onClick={() => setActiveTab("login")}
+                  onClick={() => changeTab("login")}
                   className="text-blue-600 font-medium hover:underline"
                 >
                   Sign In
@@ -136,7 +141,6 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
           </p>
         </div>
 
-        {/* 🛡️  Features  Form */}
         <div className="grid grid-cols-3 gap-2 pt-6 border-t border-gray-100 text-center text-xs text-gray-600">
           <div className="flex flex-col items-center gap-1">
             <div className="text-blue-600 text-lg bg-blue-50 w-9 h-9 flex items-center justify-center rounded-full">

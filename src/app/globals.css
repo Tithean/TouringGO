@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-geist-mono), "Segoe UI", sans-serif;
+  font-family: sans-serif;
   background: #f8fafc;
   color: #0f172a;
 }

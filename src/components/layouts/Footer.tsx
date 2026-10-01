@@ -217,7 +217,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-6 md:flex-row">
           <p className="text-sm text-slate-500">
-            © 2025 TouringGO. All rights reserved.
+            © 2026 TouringGO. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
