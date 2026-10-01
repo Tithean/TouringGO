@@ -21,6 +21,3 @@ export type Attraction = {
   };
 };
 
-export type SearchApiResponse = {
-  content: Attraction[];
-};
