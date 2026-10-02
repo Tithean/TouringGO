@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/TouringGO_Logo_Full.png",
+        url: "/touringgo.png",
         width: 1200,
         height: 630,
         alt: "openGraph",
