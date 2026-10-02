@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/openG.png",
+        url: "https://vercel.app",
         width: 1200,
         height: 630,
         alt: "openGraph",
