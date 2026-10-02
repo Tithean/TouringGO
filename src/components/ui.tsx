@@ -35,14 +35,11 @@ export function SectionHeading({
   return (
     <div className="mb-4 flex items-center justify-between">
       <h2 className="text-xl font-bold text-slate-900">{title}</h2>
-      {viewAllHref && (
-        <Link
-          href={viewAllHref}
+        <div
           className="text-sm font-semibold text-brand-600 hover:underline"
         >
           View all →
-        </Link>
-      )}
+        </div>
     </div>
   );
 }

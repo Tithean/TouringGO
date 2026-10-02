@@ -13,12 +13,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 async function HomePage() {
   // Province API data
-  const provinces = await getProvince();
-  const topProvinces = provinces.slice(0, 4);
+  const Provinces = await getProvince();
+  const topProvinces = Provinces.slice(0, 8);
 
   // Attraction API data
   const attractions = await getAttraction();
-  const topAttractions = attractions.slice(0, 4);
+  const topAttractions = attractions.slice(0, 8);
 
   return (
     <>
@@ -127,7 +127,7 @@ async function HomePage() {
             <div className="flex justify-between items-end mb-8">
               <div>
                 <h2 className="text-3xl font-extrabold text-slate-900">
-                  Popular Destinations
+                  Provinces in Cambodia
                 </h2>
                 <p className="text-slate-500 mt-2">
                   Explore top provinces loved by travelers
@@ -147,13 +147,11 @@ async function HomePage() {
             </div>
           </section>
 
-          {/* 3rd section */}
-          {/* Featured Attractions */}
           <section>
             <div className="flex justify-between items-end mb-8">
               <div>
                 <h2 className="text-3xl font-extrabold text-slate-900">
-                  Featured Experiences
+                  Popular Places
                 </h2>
                 <p className="text-slate-500 mt-2">
                   Top rated tourist attractions and tours
