@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     creator: "@group4",
     title: "touringgo",
     description: "Find places to travel in Cambodia",
-    images: ['https://vercel.app/opengraph.png']
+    images: ['opengraph.png']
   },
   openGraph: {
     title: "Touring-GO",
@@ -36,9 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://vercel.app/opengraph.png",
-        width: 1200,
-        height: 630,
+        url: "opengraph.png",
         alt: "openGraph",
       },
     ],
