@@ -9,7 +9,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 export const metadata: Metadata = {
   title: "TouringGO",
   description: "Explore attractions in Cambodia",
@@ -18,7 +17,22 @@ export const metadata: Metadata = {
     shortcut: siteIcon.src,
     apple: siteIcon.src,
   },
+  openGraph: {
+    title: "Touring-GO",
+    description: "Tour website",
+    url: "https://touringgo.vercel.app/",
+    type: "website",
+    images: [
+      {
+        url: "/TouringGO_Logo_Full.png",
+        width: 1200,
+        height: 630,
+        alt: "openGraph",
+      },
+    ],
+  },
 };
+
 
 export default function RootLayout({
   children,
