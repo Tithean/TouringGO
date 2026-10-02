@@ -4,11 +4,13 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import siteIcon from "@/assets/TouringGO_Logo.png";
 import "./globals.css";
+import { url } from "inspector";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 export const metadata: Metadata = {
   title: "TouringGO",
   description: "Explore attractions in Cambodia",
@@ -17,22 +19,30 @@ export const metadata: Metadata = {
     shortcut: siteIcon.src,
     apple: siteIcon.src,
   },
+  metadataBase: new URL("http://vercel.com"),
+
+  twitter: {
+    card: "summary_large_image",
+    site: "touringgo.vercel.com",
+    creator: "@group4",
+    title: "touringgo",
+    description: "Find places to travel in Cambodia",
+  },
   openGraph: {
     title: "Touring-GO",
     description: "Tour website",
     url: "https://touringgo.vercel.app/",
     type: "website",
-    // images: [
-    //   {
-    //     url: "https://vercel.app",
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "openGraph",
-    //   },
-    // ],
+    images: [
+      {
+        url: "https://vercel.app",
+        width: 1200,
+        height: 630,
+        alt: "openGraph",
+      },
+    ],
   },
 };
-
 
 export default function RootLayout({
   children,
