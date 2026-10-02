@@ -5,6 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
+import BannerAuth from "@/assets/auth.jpg"
+
 interface AuthenticationProps {
   defaultTab?: "login" | "register";
 }
@@ -26,7 +28,8 @@ export default function Auth({ defaultTab = "login" }: AuthenticationProps) {
 
   return (
     <div className="w-full min-h-screen flex bg-gray-50 text-black font-sans relative">
-      <div className="hidden md:flex md:w-[45%] lg:w-[42%] relative overflow-hidden bg-blue-600 self-stretch">
+      <div className="hidden md:flex md:w-[45%] lg:w-[42%] relative overflow-hidden bg-blue-600 self-stretch"
+      >
         <div className="absolute inset-0 bg-blue-950/25 z-10" />
 
         <div className="relative z-20 p-12 flex flex-col justify-between h-full w-full text-white">

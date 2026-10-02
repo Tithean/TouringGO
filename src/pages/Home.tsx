@@ -25,11 +25,11 @@ async function HomePage() {
       <div className="flex flex-col">
         {/* Hero Section */}
         <section className="relative bg-blue-600 h-[600px] w-full overflow-hidden">
-          <img
+          {/* <img
             src={Banner.src}
             alt="Cambodia travel destination"
             className="absolute inset-0 h-full w-full object-cover"
-          />
+          /> */}
           <div className="absolute inset-0 bg-blue-600/60"/>
 
           <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-4">
