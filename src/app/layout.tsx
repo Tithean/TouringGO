@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     description: "Tour website",
     url: "https://touringgo.vercel.app/",
     type: "website",
-    images: [
-      {
-        url: "https://vercel.app",
-        width: 1200,
-        height: 630,
-        alt: "openGraph",
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "https://vercel.app",
+    //     width: 1200,
+    //     height: 630,
+    //     alt: "openGraph",
+    //   },
+    // ],
   },
 };
 
