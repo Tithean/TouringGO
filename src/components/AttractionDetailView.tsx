@@ -12,12 +12,13 @@ function formatEntryFee(value?: number) {
   return value > 0 ? `$${value}` : "Free";
 }
 
-export default async function AttractionDetailPage({
-  params,
+export default async function AttractionDetailView({
+  code,
+  id,
 }: {
-  params: Promise<{ code: string; id: string }>;
+  code: string;
+  id: string;
 }) {
-  const { code, id } = await params;
   const attractionId = Number(decodeURIComponent(id || ""));
 
   if (!Number.isFinite(attractionId) || attractionId <= 0) {

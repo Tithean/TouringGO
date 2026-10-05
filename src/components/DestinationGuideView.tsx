@@ -179,12 +179,11 @@ export async function getDestinationPageProps(
   };
 }
 
-export default async function DestinationGuidePage({
-  params,
+export default async function DestinationGuideView({
+  code,
 }: {
-  params: Promise<{ code: string }>;
+  code: string;
 }) {
-  const { code } = await params;
   const rawValue = decodeURIComponent(code || "").trim();
 
   if (!rawValue) {
@@ -234,7 +233,9 @@ export default async function DestinationGuidePage({
                 Home
               </Link>
               <span className="mx-2">/</span>
-              <span>Destinations</span>
+              <Link href="/destination" className="hover:text-white">
+                Destinations
+              </Link>
               <span className="mx-2">/</span>
               <span>{name}</span>
             </p>

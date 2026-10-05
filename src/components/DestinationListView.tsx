@@ -1,7 +1,7 @@
 import ProvinceCard from "@/components/HomeCard";
 import getProvince from "@/services/getProvince";
 
-export default async function DestinationPage() {
+export default async function DestinationListView() {
   const provinces = await getProvince();
 
   return (
